@@ -1,7 +1,7 @@
 import './index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { HashRouter, Routes, Route, Link } from 'react-router-dom'
 
 import './index.css'
 import reportWebVitals from './reportWebVitals'
@@ -12,7 +12,7 @@ import { AppBar, AppBarTitle, MessageQueue } from 'react-md'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <MessageQueue>
-    <BrowserRouter>
+    <HashRouter>
       <AppBar style={{ background: '#132040' }} fixed>
         <AppBarTitle>
           <Link style={{ textDecoration: 'none', color: 'white' }} to={'/'}>
@@ -24,7 +24,7 @@ root.render(
         <Route index path='/' element={<Facilities />} />
         <Route path='/:facilityId' element={<Facility />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </MessageQueue>
 )
 
