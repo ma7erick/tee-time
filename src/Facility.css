@@ -1,0 +1,73 @@
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 56px;
+}
+
+.half {
+  max-width: 60%;
+}
+
+.sectionContainer {
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.time-list {
+  list-style: none;
+}
+
+.textField {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.picture {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.header {
+  background: #132040;
+}
+
+.teeTimesContainer {
+  height: 40%;
+}
+
+.teeTimesList {
+  overflow: auto;
+  height: 80%;
+}
+
+.teeTimeChip {
+  border-radius: 4px;
+  margin: 2px 2px;
+  width: 95%;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.facilityName {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.facilityDetails {
+  margin-top: 20px;
+}
+
+.facilityAddress {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+h1 {
+  margin-top: 0;
+}

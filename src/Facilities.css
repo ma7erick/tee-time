@@ -1,0 +1,18 @@
+.facilitiesContainer {
+  text-align: center;
+  padding-top: 56px;
+}
+
+.facilities {
+  display: flex;
+  justify-content: center;
+}
+
+.facilitiesHeader {
+  margin-top: 24px;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
