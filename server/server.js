@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const path = require('path')
 require('dotenv').config({ path: './config.env' })
 const port = process.env.PORT || 5001
 const corsOptions = {
@@ -11,6 +12,10 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(express.json())
 app.use(require('./routes/facilities'))
+app.use(express.static(path.join(__dirname, '../build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build'))
+})
 
 // get driver connection
 const dbo = require('./db/conn')
