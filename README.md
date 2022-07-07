@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-You can visit the deployment of this app at https://cc-tee-times.herokuapp.com/#/62c5274ffae03932819babcb
+You can visit the deployment of this app at https://cc-tee-times.herokuapp.com
 
 To run locally, follow these steps:
 
