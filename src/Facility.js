@@ -61,7 +61,6 @@ export default function Facility () {
       reservations.add(timeKey)
     })
   }
-  console.log('selectedTime', selectedTime)
   return (
     <div className='container'>
       <div className='half'>

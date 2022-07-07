@@ -6,8 +6,6 @@ const dbo = require('../db/conn')
 const facilityRoutes = express.Router()
 
 facilityRoutes.route('/facilities').get(function (req, res) {
-  console.log('hit meh')
-
   let db = dbo.getDb()
   db.collection('facilities')
     .find({})
@@ -18,15 +16,12 @@ facilityRoutes.route('/facilities').get(function (req, res) {
 })
 
 facilityRoutes.route('/facilities/:id').get(function (req, res) {
-  console.log('hit here???')
   let db = dbo.getDb()
   db.collection('facilities').findOne(
     {
       _id: ObjectId(req.params.id)
     },
     function (err, result) {
-      console.log('got facility?')
-      console.log(result)
       if (err) throw err
       res.json(result)
     }
@@ -34,7 +29,6 @@ facilityRoutes.route('/facilities/:id').get(function (req, res) {
 })
 
 facilityRoutes.route('/facilities/:id/reserve').put(async function (req, res) {
-  console.log('reservin!!')
   let db = dbo.getDb()
   const updates = { $push: { reservations: req.body } }
   await db
