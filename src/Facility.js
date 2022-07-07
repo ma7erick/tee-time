@@ -5,7 +5,10 @@ import dayjs from 'dayjs'
 import { get } from 'lodash'
 
 import './Facility.css'
-import { Button, Chip, TextField, useAddMessage } from 'react-md'
+import { useAddMessage } from 'react-md'
+import FacilityDetails from './FacilityDetails'
+import TeeTimes from './TeeTimes'
+import RegistrationForm from './RegistrationForm'
 
 const times = []
 for (let i = 0; i < 19; i++) {
@@ -27,9 +30,7 @@ export default function Facility () {
   const addMessage = useAddMessage()
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5001/facilities/${facilityId}`)
-      .then(res => setFacility(res.data))
+    axios.get(`/facilities/${facilityId}`).then(res => setFacility(res.data))
   }, [facilityId, selectedTime])
 
   const submitTime = function () {
@@ -37,7 +38,7 @@ export default function Facility () {
 
     if (timeObj) {
       axios
-        .put(`http://localhost:5001/facilities/${facilityId}/reserve`, {
+        .put(`/facilities/${facilityId}/reserve`, {
           date: timeObj.toDate(),
           firstName,
           lastName,
@@ -64,86 +65,24 @@ export default function Facility () {
   return (
     <div className='container'>
       <div className='half'>
-        <div className='sectionContainer'>
-          <h1>Facility Details</h1>
-          {facility ? (
-            <>
-              <img
-                className='picture'
-                src={`${facility.imagePath}`}
-                alt={facility.imagePath}
-              />
-              <div className='facilityName'>{facility.name}</div>
-              <div className='facilityAddress'>{facility.address}</div>
-              <div className='facilityDetails'>{facility.details}</div>
-            </>
-          ) : null}
-          {}
-        </div>
+        <FacilityDetails facility={facility} />
       </div>
       <div className='half'>
-        <div className='sectionContainer teeTimesContainer'>
-          <h1>Tee Times</h1>
-          <div className='teeTimesList'>
-            <ul>
-              {times.map((time, i) => {
-                const isTimeAvailable = !reservations.has(
-                  time.format('YYYY-MM-DD-HH-mm')
-                )
-                return (
-                  <li key={i} className='time-list'>
-                    <Chip
-                      className='teeTimeChip'
-                      key={time.format('HH:mm')}
-                      selected={selectedTime === i}
-                      selectedThemed
-                      onClick={() => setSelectedTime(i)}
-                      disabled={!isTimeAvailable}
-                    >
-                      {time.format('H:mm A')}
-                      {' -- '}
-                      {isTimeAvailable ? 'Available' : 'Reserved'}
-                    </Chip>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        </div>
-        <div className='sectionContainer'>
-          <h1>Registration Form</h1>
-          <TextField
-            className='textField'
-            key='firstName'
-            // label='First Name'
-            name='firstName'
-            placeholder='First Name'
-            onChange={e => setFirstName(e.target.value)}
-            value={firstName}
-            // theme='filled'
-          />
-          <TextField
-            className='textField'
-            key='lastName'
-            placeholder='Last Name'
-            onChange={e => setLastName(e.target.value)}
-          />
-          <TextField
-            className='textField'
-            key='userId'
-            placeholder='PGA Member ID'
-            onChange={e => setUserId(e.target.value)}
-          />
-          <Button
-            id='outlined-button-5'
-            theme='clear'
-            themeType='outline'
-            onClick={submitTime}
-            disabled={selectedTime < 0 || !firstName || !lastName}
-          >
-            Submit
-          </Button>
-        </div>
+        <TeeTimes
+          times={times}
+          reservations={reservations}
+          selectedTime={selectedTime}
+          setSelectedTime={setSelectedTime}
+        />
+        <RegistrationForm
+          firstName={firstName}
+          lastName={lastName}
+          selectedTime={selectedTime}
+          setFirstName={setFirstName}
+          setLastName={setLastName}
+          setUserId={setUserId}
+          submitTime={submitTime}
+        />
       </div>
     </div>
   )

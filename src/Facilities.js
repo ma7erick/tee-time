@@ -7,9 +7,7 @@ import './Facilities.css'
 export default function Facilities () {
   const [facilities, setFacilities] = useState([])
   useEffect(() => {
-    axios
-      .get(`http://localhost:5001/facilities`)
-      .then(res => setFacilities(res.data))
+    axios.get(`/facilities`).then(res => setFacilities(res.data))
   }, [])
 
   return (
